@@ -1,8 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Pokedex';
-import registerServiceWorker from './registerServiceWorker';
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Pokecard from './Pokecard';
+
+class App extends Component {
+	render() {
+		return (
+			<div>
+				<Pokecard pokemon={this.props.pokemon}/>
+			</div>
+		);
+	}
+}
 
 const POKEMON: [
   {
@@ -37,5 +46,4 @@ const POKEMON: [
   }
 ]
 
-ReactDOM.render(<App pokemon={POKEMON} />, document.getElementById('root'));
-registerServiceWorker();
+export default App;
