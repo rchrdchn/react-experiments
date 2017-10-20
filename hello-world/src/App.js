@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import hello from './hello';
-import world from './world';
+import Hello from './hello';
+import World from './world';
 
 class App extends Component {
   render() {
     return (
       <div>
-      <hello /> <world />
+        <h1>
+          <Hello /> <World />
+        </h1>
       </div>
     );
   }
