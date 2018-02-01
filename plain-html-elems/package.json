@@ -1,14 +1,11 @@
 {
-  "name": "resume",
+  "name": "plain-html-elems",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "muicss": "^0.9.35",
-    "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14"
   },
   "scripts": {
     "start": "react-scripts start",
