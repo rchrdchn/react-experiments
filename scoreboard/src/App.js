@@ -27,4 +27,12 @@ function Application(props) {
     );
 }
 
+// Application.propTypes = {
+//     title: React.PropTypes.string,
+// };
+
+Application.defaultProps = {
+    title: "Scoreboard",
+};
+
 export default Application;
