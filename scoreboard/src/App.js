@@ -6,7 +6,7 @@ function Header(props) {
     <div className="header">
         <h1>{props.title}</h1>
     </div>
-    )
+    );
 }
 
 // Header.propTypes = {
@@ -25,15 +25,11 @@ function Player(props) {
                     {props.name}
                 </div>
                 <div className="player-score">
-                    <div className="counter">
-                        <button className="counter-action decrement"> - </button>
-                        <div className="counter-score"> {props.score} </div>
-                        <button className="counter-action increment"> + </button>
-                    </div>
+                    <Counter score={props.score} />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 // Player.propTypes = {
@@ -46,6 +42,20 @@ function Player(props) {
 //     score: "31"
 // }
 
+function Counter(props) {
+    return (
+        <div className="counter">
+            <button className="counter-action decrement"> - </button>
+            <div className="counter-score"> {props.score} </div>
+            <button className="counter-action increment"> + </button>
+        </div>
+    );
+}
+
+// Counter.propTypes = {
+//     score: React.PropTypes.number.isRequired,
+// }
+
 function Application(props) {
     return (
         <div className="scoreboard">
@@ -55,13 +65,5 @@ function Application(props) {
         </div>
     );
 }
-
-// Application.propTypes = {
-//     title: React.PropTypes.string,
-// };
-
-Application.defaultProps = {
-    title: "Scoreboard",
-};
 
 export default Application;
