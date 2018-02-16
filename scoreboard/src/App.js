@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 // import { Grid, Jumbotron } from 'react-bootstrap';
 
+var PLAYERS = [
+    {
+        name: "Richard",
+        score: 31
+    },
+    {
+        name: "Will",
+        score: 35
+    },
+    {
+        name: "Micho",
+        score: 34
+    },
+]
+
 function Header(props) {
     return (
     <div className="header">
@@ -9,12 +24,8 @@ function Header(props) {
     );
 }
 
-// Header.propTypes = {
-//     title: React.PropTypes.string;
-// }
-
-Header.defaultProps = {
-    title: "Scoreboard",
+Header.propTypes = {
+    title: PropTypes.string,
 }
 
 function Player(props) {
@@ -32,15 +43,15 @@ function Player(props) {
     );
 }
 
-// Player.propTypes = {
-//     name: React.PropTypes.string.isRequired,
-//     score: React.PropTypes.number.isRequired,
-// }
+Player.propTypes = {
+    name: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+}
 
-// Player.defaultProps = {
-//     name: "Richard",
-//     score: "31"
-// }
+Player.defaultProps = {
+    name: "Richard",
+    score: "31"
+}
 
 function Counter(props) {
     return (
@@ -52,9 +63,9 @@ function Counter(props) {
     );
 }
 
-// Counter.propTypes = {
-//     score: React.PropTypes.number.isRequired,
-// }
+Counter.propTypes = {
+    score: PropTypes.number.isRequired,
+}
 
 function Application(props) {
     return (
@@ -64,6 +75,18 @@ function Application(props) {
             <Player name="William" score={32} />
         </div>
     );
+}
+
+Application.propTypes = {
+    title: PropTypes.string,
+    players: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        score: PropTypes.number.isRequired,
+    })).isRequired,
+}
+
+Application.defaultProps = {
+    title: "Scoreboard",
 }
 
 export default Application;
