@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Application from './App';
 import registerServiceWorker from './registerServiceWorker';
+import PLAYERS from './App';
 
 ReactDOM.render(<Application players={PLAYERS} />, document.getElementById('root'));
 registerServiceWorker();
