@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 // import { Grid, Jumbotron } from 'react-bootstrap';
 
-var PLAYERS = [
+const PLAYERS = [
     {
         name: "Richard",
         score: 31
@@ -13,7 +14,7 @@ var PLAYERS = [
     {
         name: "Micho",
         score: 34
-    },
+    }
 ]
 
 function Header(props) {
@@ -48,10 +49,10 @@ Player.propTypes = {
     score: PropTypes.number.isRequired,
 }
 
-Player.defaultProps = {
-    name: "Richard",
-    score: "31"
-}
+// Player.defaultProps = {
+//     name: "Richard",
+//     score: "31"
+// }
 
 function Counter(props) {
     return (
@@ -71,8 +72,10 @@ function Application(props) {
     return (
         <div className="scoreboard">
             <Header title={props.title} />
-            <Player name="Richard" score={31} />
-            <Player name="William" score={32} />
+            <div className="players">
+                <Player name="Richard" score={31} />
+                <Player name="William" score={32} />
+            </div>
         </div>
     );
 }

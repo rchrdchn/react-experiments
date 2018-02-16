@@ -5,5 +5,5 @@ import './index.css';
 import Application from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Application  />, document.getElementById('root'));
+ReactDOM.render(<Application players={PLAYERS} />, document.getElementById('root'));
 registerServiceWorker();
