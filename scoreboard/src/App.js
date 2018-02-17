@@ -1,19 +1,23 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 // import { Grid, Jumbotron } from 'react-bootstrap';
 
-const PLAYERS = [
+var PLAYERS = [
     {
         name: "Richard",
-        score: 31
+        score: 31,
+        id: 1
     },
     {
         name: "Will",
-        score: 35
+        score: 35,
+        id: 2
     },
     {
         name: "Micho",
-        score: 34
+        score: 34,
+        id: 3
     }
 ]
 
@@ -73,8 +77,9 @@ function Application(props) {
         <div className="scoreboard">
             <Header title={props.title} />
             <div className="players">
-                <Player name="Richard" score={31} />
-                <Player name="William" score={32} />
+                {props.players.map(function(player){
+                    return <Player name={player.name} score={player.score} key={player.id} />
+                })}
             </div>
         </div>
     );
@@ -85,6 +90,7 @@ Application.propTypes = {
     players: PropTypes.arrayOf(PropTypes.shape({
         name: PropTypes.string.isRequired,
         score: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
     })).isRequired,
 }
 
@@ -94,3 +100,4 @@ Application.defaultProps = {
 
 export default Application;
 export {PLAYERS};
+ReactDOM.render(<Application players={PLAYERS} />, document.getElementById('root'));
