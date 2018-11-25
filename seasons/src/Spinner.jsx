@@ -10,4 +10,8 @@ const Spinner = (props) => {
 	)
 }
 
+Spinner.defeaultProps = {
+	text: 'Loading...'
+}
+
 export default Spinner;
