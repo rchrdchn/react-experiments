@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Address from './address';
 import GrossYield from './grossYield';
 import ListingPrice from './listingPrice';
-import Rent from './monthlyRent';
+import MonthlyRent from './monthlyRent';
 import PropertyImage from './propertyImage';
 import Year from './year';
 
@@ -15,6 +15,7 @@ class RoofContainer extends Component {
 			items: []
 		}
 	}
+	
 	componentDidMount() {
 		const API_URL = "http://dev1-sample.azurewebsites.net/properties.json";
 
@@ -28,11 +29,9 @@ class RoofContainer extends Component {
 		})
 	}
 
-
 	render() {
 		const { items, isLoaded } = this.state;
 		const { properties } = items;
-
 		
 		if(!isLoaded) {
 			return <div>Loading...</div>
@@ -40,10 +39,42 @@ class RoofContainer extends Component {
 			return (
 				<div>
 				{properties.map((item, index) => {
+					function physicalExist() {
+						const physical = item.physical;
+						if(physical !== null) {
+							return `built: ${physical.yearBuilt}`;
+						}
+					}
+
+					function priceExist(){
+						const price = item.financial;
+						if(price !== null) {
+							return price.listPrice;
+						}
+
+					}
+
+					function rentExist(){ 
+						const rent = item.financial;
+						if(rent !== null) {
+							return rent.monthlyRent;
+						}
+					}
+
+					function grossYield(){
+						if (rentExist() && priceExist()) {
+							return `gross yield: ${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
+						}
+					}
+					
 					return (
 						<div key={index}>
 							<PropertyImage source={item.mainImageUrl} />
 							<Address primary={item.address.address1} secondary={`${item.address.city}; ${item.address.state} ${item.address.zip}`} />
+							<Year year={physicalExist()} />
+							<ListingPrice price={priceExist()} />
+							<MonthlyRent rent={rentExist()} />
+							<GrossYield grossYield={grossYield()} />
 						</div>
 					)
 				})}
