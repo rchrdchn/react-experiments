@@ -5,6 +5,22 @@ import ListingPrice from './listingPrice';
 import MonthlyRent from './monthlyRent';
 import PropertyImage from './propertyImage';
 import Year from './year';
+import PropTypes from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+
+const styles = {
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  }
+};
 
 class RoofContainer extends Component {
 	constructor(props) {
@@ -21,12 +37,21 @@ class RoofContainer extends Component {
 
 		fetch(API_URL)
 		.then(res => res.json())
-		.then(data => {
-			this.setState({
-				isLoaded: true,
-				items: data
-			})
-		})
+		.then(
+			data => {
+				this.setState({
+					isLoaded: true,
+					items: data
+				})
+			},
+			//TODO: catch error
+			error => {
+	          	this.setState({
+	            	isLoaded: true,
+	            	error
+	          	})
+        	}
+		)
 	}
 
 	render() {
@@ -42,14 +67,14 @@ class RoofContainer extends Component {
 					function physicalExist() {
 						const physical = item.physical;
 						if(physical !== null) {
-							return `built: ${physical.yearBuilt}`;
+							return `${physical.yearBuilt}`;
 						}
 					}
 
 					function priceExist(){
 						const price = item.financial;
 						if(price !== null) {
-							return price.listPrice;
+							return price.listPrice.toFixed(2);
 						}
 
 					}
@@ -57,24 +82,39 @@ class RoofContainer extends Component {
 					function rentExist(){ 
 						const rent = item.financial;
 						if(rent !== null) {
-							return rent.monthlyRent;
+							return rent.monthlyRent.toFixed(2);
 						}
 					}
 
 					function grossYield(){
 						if (rentExist() && priceExist()) {
-							return `gross yield: ${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
+							return `${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
 						}
 					}
 					
 					return (
 						<div key={index}>
-							<PropertyImage source={item.mainImageUrl} />
-							<Address primary={item.address.address1} secondary={`${item.address.city}; ${item.address.state} ${item.address.zip}`} />
-							<Year year={physicalExist()} />
-							<ListingPrice price={priceExist()} />
-							<MonthlyRent rent={rentExist()} />
-							<GrossYield grossYield={grossYield()} />
+							<Card>
+								<CardActionArea style={styles.card}>
+									<CardMedia
+									style={styles.media}
+									image={item.mainImageUrl}
+									title="Contemplative Reptile"
+									/>
+									<CardContent>
+										<Address primary={item.address.address1} secondary={`${item.address.city}, ${item.address.state} ${item.address.zip}`} />
+										<ListingPrice price={priceExist()} />
+										<Year year={physicalExist()} />
+										<MonthlyRent rent={rentExist()} />
+										<GrossYield grossYield={grossYield()} />
+									</CardContent>
+									<CardActions>
+										<Button size="small" color="primary">
+										View More
+										</Button>
+									</CardActions>
+								</CardActionArea>
+							</Card>
 						</div>
 					)
 				})}

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const Rent = props => {
 	const { rent } = props;
 	return (
-		<div>
-			<h1>{rent}</h1>
-		</div>
+		<Fragment>
+			<Typography gutterBottom variant="h5" component="h2">Rent ${rent}</Typography>
+		</Fragment>
 	)
 }
 

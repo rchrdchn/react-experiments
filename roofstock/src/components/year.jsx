@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const Year = props => {
 	const { year } = props;
 	return (
-		<div>
-			<h1>{year}</h1>
-		</div>
+		<Fragment>
+			<Typography gutterBottom variant="h5" component="h2">Built {year}</Typography>
+		</Fragment>
 	)
 }
 
