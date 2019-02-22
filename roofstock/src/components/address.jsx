@@ -4,7 +4,7 @@ const Address = props => {
 	const { primary, secondary } = props;
 	return (
 		<div>
-			<h1>{primary}</h1>
+			<h3>{primary}</h3>
 			<p>{secondary}</p>
 		</div>
 	)

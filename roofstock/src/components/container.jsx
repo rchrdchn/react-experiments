@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Address from './address';
 import GrossYield from './grossYield';
 import ListingPrice from './listingPrice';
@@ -11,59 +11,45 @@ class RoofContainer extends Component {
 		super(props);
 
 		this.state = {
-			items: [{
-				image: '',
-				primaryAddress: '',
-				secondaryAddress: '',
-				year: '',
-				price: '',
-				rent: '',
-				grossYield: ''
-			}]
+			isLoaded: false,
+			items: []
 		}
 	}
 	componentDidMount() {
-		this.getData();
-	}
-
-	getData = async () => {
 		const API_URL = "http://dev1-sample.azurewebsites.net/properties.json";
-		const apiRequest = await fetch(API_URL);
-		const response = await apiRequest.json();
-		const propertyData = response.properties;
 
-		propertyData.map(data => {
+		fetch(API_URL)
+		.then(res => res.json())
+		.then(data => {
 			this.setState({
-				items: [{
-					image: !null && data.mainImageUrl,
-					primaryAddress: !null && data.address.address1,
-					secondaryAddress: !null && `${data.address.city}, ${data.address.state} ${data.address.zip}`,
-					year: null && data.physical.yearBuilt,
-					price: null && data.financial.listPrice.toFixed(2),
-					rent: null && data.financial.monthlyRent.toFixed(2),
-					// grossYield: !null && rent * 12 / price
-				}]
+				isLoaded: true,
+				items: data
 			})
 		})
 	}
 
+
 	render() {
-		const { items } = this.state;
-		return (
-			<div>
-				{items.map((item, index) => (
-					console.log(item)
-					// <div key={index}>
-					// 	<PropertyImage source={item.image} />
-					// 	<Address primary={item.primaryAddress} secondary={item.secondaryAddress} />
-					// 	<Year year={item.year} />
-					// 	<ListingPrice price={item.price} />
-					// 	<Rent rent={item.rent} />
-					// 	<GrossYield grossYield={item.grossYield} />
-					// </div>
-				))}
-			</div>
-		)	
+		const { items, isLoaded } = this.state;
+		const { properties } = items;
+
+		
+		if(!isLoaded) {
+			return <div>Loading...</div>
+		} else {
+			return (
+				<div>
+				{properties.map((item, index) => {
+					return (
+						<div key={index}>
+							<PropertyImage source={item.mainImageUrl} />
+							<Address primary={item.address.address1} secondary={`${item.address.city}; ${item.address.state} ${item.address.zip}`} />
+						</div>
+					)
+				})}
+				</div>
+			)
+		}
 	}
 }
 
