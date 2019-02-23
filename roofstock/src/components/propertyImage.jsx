@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const PropertyImage = props => {
 	const { source, text } = props;
 	return (
-		<div>
+		<Fragment>
 			<img src={source} alt={text} />
-		</div>
+		</Fragment>
 	)
 }
 
