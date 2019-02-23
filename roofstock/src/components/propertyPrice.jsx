@@ -3,10 +3,9 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	container: {
-		position: 'absolute',
-		top: '63%',
-    	right: '10px',
-    	fontWeight: 500
+    	fontSize: '14px',
+    	fontWeight: 400,
+    	textAlign: 'left'
 	}
 }
 
@@ -20,7 +19,7 @@ const PropertyPrice = props => {
 				variant="subtitle1"
 				style={styles.container}
 			>
-			{price ? `$${price}` : "Contact Us"}
+			{price ? `Listed at $${price}` : "Contact Us"}
 			</Typography>
 		</Fragment>
 	)

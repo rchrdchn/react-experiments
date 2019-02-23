@@ -9,13 +9,21 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import NoImage from '../images/empty-photo.png'
 
 const styles = {
   card: {
-    maxWidth: '640px',
+    maxWidth: '640px'
   },
   media: {
-    height: '150px',
+    height: '150px'
+  },
+  height: {
+  	// minHeight: '261px'
+  },
+  paper: {
+  	marginRight: '30px',
+  	marginLeft: '30px'
   }
 }
 
@@ -54,12 +62,12 @@ class RoofContainer extends Component {
 	render() {
 		const { items, isLoaded } = this.state;
 		const { properties } = items;
-		
+
 		if(!isLoaded) {
 			return <div>Loading...</div>
 		} else {
 			return (
-				<div>
+				<div style={styles.paper}>
 					<Grid container spacing={24}>
 					{properties.map((item, index) => {
 						function yearExist() {
@@ -67,7 +75,6 @@ class RoofContainer extends Component {
 							if(physical !== null) {
 								return `${physical.yearBuilt}`;
 							}
-							return 'not available'
 						}
 
 						function priceExist(){
@@ -95,11 +102,11 @@ class RoofContainer extends Component {
 						return (
 					        <Grid item key={index} md={3}>
 					          	<Paper>
-									<Card>
+									<Card style={styles.height}>
 										<CardActionArea style={styles.card}>
 											<CardMedia
 												style={styles.media}
-												image={item.mainImageUrl}
+												image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
 												title={item.address.address1}
 											/>
 											<CardContent>

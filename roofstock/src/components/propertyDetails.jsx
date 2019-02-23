@@ -3,7 +3,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	fontWeight: {
-		fontWeight: 300
+		fontSize: '14px',
+		fontWeight: 400
 	}
 }
 const PropertyDetails = props => {
@@ -17,7 +18,15 @@ const PropertyDetails = props => {
 				align="left"
 				style={styles.fontWeight}
 			>
-			Rent: ${rent} | Gross Yield: {grossYield} | {year}
+			{rent && `Rent: $${rent} |`}  {grossYield && `Gross Yield: ${grossYield}`}
+			</Typography>
+			<Typography
+				gutterBottom
+				variant="subtitle2"
+				align="left"
+				style={styles.fontWeight}
+			>
+			 {year && `Built: ${year}`}
 			</Typography>
 		</Fragment>
 	)

@@ -3,11 +3,14 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	primary: {
+		fontSize: '14px',
 		fontWeight: '500',
 		marginBottom: '0'
 	},
 	secondary: {
-		fontWeight: '300'
+		color: 'rgb(102, 102, 102)',
+		fontSize: '12px',
+		fontWeight: '400'
 	}
 }
 
