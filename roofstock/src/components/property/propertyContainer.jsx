@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 class PropertyContainer extends Component {
 	constructor(props) {
@@ -33,37 +32,40 @@ class PropertyContainer extends Component {
 		)
 	}
 
+	renderImages(properties) {
+		const result = properties.map((item) => {
+			const images = item.resources;
+			if (images !== null) {
+				const image = images.photos;
+				return image.map((photo, index) => {
+					return <img src={photo.urlSmall} alt={index} key={index} />;
+				})
+			}
+		})
+		return result;
+	}
+
+	renderAddress(properties) {
+		const result = properties.map((item, index) => {
+			const addresses = item.address;
+			if (addresses !== null) {
+				return <p key={index}>{addresses.address1}</p>
+			}
+		})
+		return result;
+	}
+
 	render() {
 		const { items, isLoaded } = this.state;
 		const { properties } = items;
-
-		const images =
-			isLoaded && properties.map((item, index) => {
-				const images = item.resources;
-					if (images !== null) {
-						let image = images.photos;
-						return image.map(photo => {
-							return <img src={photo.urlSmall} alt={index} key={index} />;
-						})
-					}
-				})
-		
-		const address = isLoaded && properties.map(item => {
-			const addresses = item.address;
-			if (addresses !== null) {
-				return <p>{addresses.address1}</p>
-			}
-		})
 
 		if(!isLoaded) {
 			return <div>Loading...</div>
 		} else {
 			return (
 				<div>
-				<Link to="/">Home</Link>
-				<br />
-				{images}
-				{address}
+					{this.renderImages(properties)}
+					{this.renderAddress(properties)}
 				</div>
 			)
 		}
