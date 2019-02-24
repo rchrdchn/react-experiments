@@ -37,30 +37,23 @@ class PropertyContainer extends Component {
 		const { items, isLoaded } = this.state;
 		const { properties } = items;
 
+		const images =
+			isLoaded && properties.map((item, index) => {
+				const images = item.resources;
+					if (images !== null) {
+						let image = images.photos;
+						return image.map(photo => {
+							return <img src={photo.urlSmall} alt={index} key={index} />;
+						})
+					}
+				})
+
 		if(!isLoaded) {
 			return <div>Loading...</div>
 		} else {
 			return (
 				<div>
-					{properties.map((item, index) => {
-						function getPhotos() {
-							const photos = item.resources;
-							if(photos !== null) {
-								let images = photos.photos;
-								return images.map(photo => {
-									console.log(photo)
-					        		return <img src={photo.urlSmall} alt={index} />
-								})
-							}
-						}
-					
-						return (
-					        <div key={index}>
-					        	{getPhotos()}
-					        </div>
-							)
-						})}
-					<Link to="/">Home</Link>
+				{images}
 				</div>
 			)
 		}
