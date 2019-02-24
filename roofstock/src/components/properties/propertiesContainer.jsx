@@ -100,6 +100,7 @@ class PropertiesContainer extends Component {
 						return (
 					        <Grid item key={index} md={3}>
 					          	<Paper>
+									<Link to={`/property/${item.id}`}>
 									<Card style={styles.height}>
 										<CardActionArea style={styles.card}>
 											<CardMedia
@@ -121,14 +122,12 @@ class PropertiesContainer extends Component {
 											</CardContent>
 										</CardActionArea>
 									</Card>
+					        		</Link>
 								</Paper>
 					        </Grid>
 							)
 						})}
 					</Grid>
-					<Link to="/">Home</Link>
-					<br />
-					<Link to="/properties">Properties</Link>
 				</div>
 			)
 		}

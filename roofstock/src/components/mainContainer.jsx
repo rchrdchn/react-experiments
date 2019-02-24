@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import Navbar from './navbar';
+import Footer from './footer';
 import PropertiesContainer from './properties/propertiesContainer';
 import PropertyContainer from './property/propertyContainer';
 
@@ -9,11 +11,10 @@ class RoofContainer extends Component {
 		return (
 			<BrowserRouter>
 			<div>
-				<Link to="/">Home</Link>
-				<br />
-				<Link to="/properties">Properties</Link>
-				<Route exact path="/" render={() => <PropertiesContainer />} />
-				<Route path="/properties" render={props => <PropertyContainer />} />
+				<Navbar />
+				<Route path="/" exact render={() => <PropertiesContainer />} />
+				<Route path="/property/:id" exact render={props => <PropertyContainer />} />
+				<Footer />
 			</div>
 			</BrowserRouter>
 		)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class PropertyContainer extends Component {
 	constructor(props) {
@@ -47,13 +47,23 @@ class PropertyContainer extends Component {
 						})
 					}
 				})
+		
+		const address = isLoaded && properties.map(item => {
+			const addresses = item.address;
+			if (addresses !== null) {
+				return <p>{addresses.address1}</p>
+			}
+		})
 
 		if(!isLoaded) {
 			return <div>Loading...</div>
 		} else {
 			return (
 				<div>
+				<Link to="/">Home</Link>
+				<br />
 				{images}
+				{address}
 				</div>
 			)
 		}
