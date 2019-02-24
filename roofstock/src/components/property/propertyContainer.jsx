@@ -11,6 +11,7 @@ class PropertyContainer extends Component {
 	}
 	
 	componentDidMount() {
+		// TODO: Make API Request outside of componentDidMount()
 		const API_URL = "http://dev1-sample.azurewebsites.net/properties.json";
 
 		fetch(API_URL)

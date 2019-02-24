@@ -7,13 +7,14 @@ import PropertiesContainer from './properties/propertiesContainer';
 import PropertyContainer from './property/propertyContainer';
 
 class RoofContainer extends Component {
+
 	render() {
 		return (
 			<BrowserRouter>
 			<div>
 				<Navbar />
-				<Route path="/" exact render={() => <PropertiesContainer />} />
-				<Route path="/property/:id" exact render={props => <PropertyContainer />} />
+				<Route path="/" exact component={PropertiesContainer} />
+				<Route path="/property/:id" exact component={PropertyContainer} />
 				<Footer />
 			</div>
 			</BrowserRouter>
