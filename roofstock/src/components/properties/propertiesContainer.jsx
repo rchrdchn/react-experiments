@@ -26,111 +26,76 @@ const styles = {
 }
 
 class PropertiesContainer extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			isLoaded: false,
-			items: []
-		}
-	}
-	
-	componentDidMount() {
-		const API_URL = "http://dev1-sample.azurewebsites.net/properties.json";
-
-		fetch(API_URL)
-		.then(res => res.json())
-		.then(
-			data => {
-				this.setState({
-					isLoaded: true,
-					items: data
-				})
-			},
-			//TODO: catch error
-			error => {
-	          	this.setState({
-	            	isLoaded: true,
-	            	error
-	          	})
-        	}
-		)
-	}
 
 	render() {
-		const { items, isLoaded } = this.state;
-		const { properties } = items;
+		const { properties } = this.props.items;
 
-		if(!isLoaded) {
-			return <div>Loading...</div>
-		} else {
-			return (
-				<div style={styles.paper}>
-					<Grid container spacing={24}>
-					{properties.map((item, index) => {
-						function yearExist() {
-							const physical = item.physical;
-							if(physical !== null) {
-								return `${physical.yearBuilt}`;
-							}
+		return (
+			<div>
+			<Grid container spacing={24}>
+				{properties.map((item, index) => {
+					function yearExist() {
+						const physical = item.physical;
+						if(physical !== null) {
+							return `${physical.yearBuilt}`;
+						}
+					}
+
+					function priceExist(){
+						const price = item.financial;
+						if(price !== null) {
+							const listedPrice = price.listPrice.toFixed(2);
+							return listedPrice;
 						}
 
-						function priceExist(){
-							const price = item.financial;
-							if(price !== null) {
-								const listedPrice = price.listPrice.toFixed(2);
-								return listedPrice;
-							}
+					}
 
+					function rentExist(){ 
+						const rent = item.financial;
+						if(rent !== null) {
+							return rent.monthlyRent.toFixed(2);
 						}
+					}
 
-						function rentExist(){ 
-							const rent = item.financial;
-							if(rent !== null) {
-								return rent.monthlyRent.toFixed(2);
-							}
+					function grossYield(){
+						if (rentExist() && priceExist()) {
+							return `${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
 						}
-
-						function grossYield(){
-							if (rentExist() && priceExist()) {
-								return `${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
-							}
-						}
-					
-						return (
-					        <Grid item key={index} md={3}>
-					          	<Paper>
-									<Link to={`/property/${item.id}`}>
-									<Card style={styles.height}>
-										<CardActionArea style={styles.card}>
-											<CardMedia
-												style={styles.media}
-												image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
-												title={item.address.address1}
+					}
+				
+					return (
+				        <Grid item key={index} md={3}>
+				          	<Paper>
+								<Link to={`/property/${item.id}`}>
+								<Card style={styles.height}>
+									<CardActionArea style={styles.card}>
+										<CardMedia
+											style={styles.media}
+											image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
+											title={item.address.address1}
+										/>
+										<CardContent>
+											<PropertyAddress
+												primary={item.address.address1}
+												secondary={`${item.address.city}, ${item.address.state}`}
 											/>
-											<CardContent>
-												<PropertyAddress
-													primary={item.address.address1}
-													secondary={`${item.address.city}, ${item.address.state}`}
-												/>
-												<PropertyPrice price={priceExist()} />
-												<PropertyDetails
-													rent={rentExist()}
-													grossYield={grossYield()}
-													year={yearExist()}
-												/>
-											</CardContent>
-										</CardActionArea>
-									</Card>
-					        		</Link>
-								</Paper>
-					        </Grid>
-							)
-						})}
-					</Grid>
-				</div>
-			)
-		}
+											<PropertyPrice price={priceExist()} />
+											<PropertyDetails
+												rent={rentExist()}
+												grossYield={grossYield()}
+												year={yearExist()}
+											/>
+										</CardContent>
+									</CardActionArea>
+								</Card>
+				        		</Link>
+							</Paper>
+				        </Grid>
+						)
+					})}
+				</Grid>
+			</div>
+		)
 	}
 }
 
