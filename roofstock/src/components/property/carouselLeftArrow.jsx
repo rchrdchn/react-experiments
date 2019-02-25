@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const CarouselLeftArrow = props => {
-    return (
-        <a
-            href="#"
-            className="carousel__arrow carousel__arrow--left"
-            onClick={this.props.onClick}
-        >
-        <span className="fa fa-2x fa-angle-left" />
-        </a>
-    )
+const styles = {
+	arrowLeft: {
+	    position: "absolute",
+	    top: "50%",
+	    display: "block",
+	    color: "rgb(221, 221, 221)",
+	    cursor: "pointer",
+	    transform: "translateY(-50%)",
+		left: "30%"
+	}
+}
+
+class CarouselLeftArrow extends Component {
+	render() {
+		return (
+			<Link
+				onClick={this.props.onClick}
+				to="#"
+				style={styles.arrowLeft}
+			>
+				<span className="fa fa-2x fa-angle-left" />
+			</Link>
+		);
+	}
 }
 
 export default CarouselLeftArrow;

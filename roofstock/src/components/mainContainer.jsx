@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Navbar from './navbar';
 import Footer from './footer';
 import PropertiesContainer from './properties/propertiesContainer';
 import PropertyContainer from './property/propertyContainer';
+
+const styles = {
+	loadingText: {
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transform: "translate(-50%, -50%)"
+	}
+}
 
 class RoofContainer extends Component {
 	constructor(props) {
@@ -24,14 +33,18 @@ class RoofContainer extends Component {
 		.then(
 			data => { this.setState({ isLoaded: true, items: data })},
 			error => { this.setState({ isLoaded: true, error })}
-		)
+			)
 	}
 
 	render() {
 		const { isLoaded, items } = this.state;
 
 		if(!isLoaded) {
-			return <div>Loading...</div>
+			return (
+				<div>
+					<h2 style={styles.loadingText}>Loading...</h2>
+				</div>
+			)
 		} else {
 			return (
 				<BrowserRouter>

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import CarouselLeftArrow from './carouselLeftArrow'
+import CarouselRightArrow from './carouselRightArrow'
+import CarouselSlider from './carouselSlider'
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	list: {
@@ -9,190 +13,122 @@ const styles = {
 	carousel: {
 		position: "relative"
 	},
-	slide: {
-	    marginRight: "auto",
-	    marginLeft: "auto",
-	    display: "none",
-	    maxWidth: "900px",
-	    listStyleType: "none",
-	    textAlign: "center"
-	},
-	slideActive: {
-	    marginRight: "auto",
-	    marginLeft: "auto",
-	    maxWidth: "900px",
-	    listStyleType: "none",
-	    textAlign: "center",
-		display: "block",
-	},
-	// Content of slides
-	content: {
-	    marginBottom: "19px",
-	    fontFamily: "'Open Sans', 'Trebuchet MS', 'sans-serif'",
-	    fontSize: "16px"
-	},
-	// Carousel arrows
-	arrowRight: {
-	    position: "absolute",
-	    top: "50%",
-	    display: "block",
-	    color: "#111",
-	    cursor: "pointer",
-	    opacity: ".75",
-	    transform: "translateY(-50%)",
-	    transition: "opacity .15s cubic-bezier(.4, 0, 1, 1)",
-		right: "32px",
-
-	    "&:focus": {
-	        outline: 0,
-	    },
-
-	    "&:hover": {
-	        opacity: ".5",
-	    }
-	},
-	arrowRight: {
-	    position: "absolute",
-	    top: "50%",
-	    display: "block",
-	    color: "#111",
-	    cursor: "pointer",
-	    opacity: ".75",
-	    transform: "translateY(-50%)",
-	    transition: "opacity .15s cubic-bezier(.4, 0, 1, 1)",
-		left: "32px",
-
-		"&:focus": {
-	        outline: 0,
-	    },
-
-	    "&:hover": {
-	        opacity: ".5",
-	    }
+	address: {
+		marginTop: "20px"
 	}
-}
-
-class CarouselLeftArrow extends Component {
-  render() {
-    return (
-      <a
-        href="#"
-        onClick={this.props.onClick}
-        style={styles.arrowLeft}
-      >
-        <span className="fa fa-2x fa-angle-left" />
-      </a>
-    );
-  }
-}
-
-class CarouselRightArrow extends Component {
-  render() {
-    return (
-      <a
-        href="#"
-        onClick={this.props.onClick}
-        style={styles.arrowRight}
-      >
-        <span className="fa fa-2x fa-angle-right" />
-      </a>
-    );
-  }
-}
-
-class CarouselSlide extends Component {
-  render() {
-    return (
-      <li
-        style={
-          this.props.index == this.props.activeIndex
-            ? styles.slideActive
-            : styles.slide
-        }
-      >
-        <p style={styles.content}>{this.props.slide.content}</p>
-      </li>
-    );
-  }
 }
 
 // Carousel wrapper component
 class Carousel extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.goToSlide = this.goToSlide.bind(this);
-    this.goToPrevSlide = this.goToPrevSlide.bind(this);
-    this.goToNextSlide = this.goToNextSlide.bind(this);
+		this.goToSlide = this.goToSlide.bind(this);
+		this.goToPrevSlide = this.goToPrevSlide.bind(this);
+		this.goToNextSlide = this.goToNextSlide.bind(this);
 
-    this.state = {
-      activeIndex: 0
-    };
-  }
+		this.state = {
+			activeIndex: 0
+		};
+	}
 
-  goToSlide(index) {
-    this.setState({
-      activeIndex: index
-    });
-  }
+	goToSlide(index) {
+		this.setState({ activeIndex: index });
+	}
 
-  goToPrevSlide(e) {
-    e.preventDefault();
+	goToPrevSlide(e) {
+		e.preventDefault();
 
-    let index = this.state.activeIndex;
-    let { slides } = this.props;
-    let slidesLength = slides.length;
+		let index = this.state.activeIndex;
+		let { slides } = this.props;
+		let slidesLength = slides.length;
 
-    if (index < 1) {
-      index = slidesLength;
-    }
+		if (index < 1) {
+			index = slidesLength;
+		}
 
-    --index;
+		--index;
 
-    this.setState({
-      activeIndex: index
-    });
-  }
+		this.setState({ activeIndex: index });
+	}
 
-  goToNextSlide(e) {
-    e.preventDefault();
+	goToNextSlide(e) {
+		e.preventDefault();
 
-    let index = this.state.activeIndex;
-    let { slides } = this.props;
-    let slidesLength = slides.length - 1;
+		let index = this.state.activeIndex;
+		let { slides } = this.props;
+		let slidesLength = slides.length - 1;
 
-    if (index === slidesLength) {
-      index = -1;
-    }
+		if (index === slidesLength) {
+			index = -1;
+		}
 
-    ++index;
+		++index;
 
-    this.setState({
-      activeIndex: index
-    });
-  }
+		this.setState({ activeIndex: index });
+	}
 
-  render() {
-    return (
-      <div className="carousel">
-        <CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
+  	renderImages(properties) {
+  		const URLPath = this.props.path.params.id;
+		const result = properties.map(item => {
+			if (item.id == URLPath) {
+				const images = item.resources;
+				if (images !== null) {
+					const image = images.photos;
+					return image.map((photo, index) => {
+						return (
+							<CarouselSlider
+				              key={index}
+				              index={index}
+				              activeIndex={this.state.activeIndex}
+				              slide={photo.urlSmall}
+				              path={this.props.match}
+				              filename={photo.filename}
+				            />
+						)
+					})
+				}
+			}
+		})
+		return result;
+	}
 
-        <ul className="carousel__slides">
-          {this.props.slides.map((slide, index) =>
-            <CarouselSlide
-              key={index}
-              index={index}
-              activeIndex={this.state.activeIndex}
-              slide={slide}
-            />
-          )}
-        </ul>
+	renderAddress(properties) {
+		const URLPath = this.props.path.params.id;
+		const result = properties.map((item, index) => {
+			if (item.id == URLPath) {
+				const addresses = item.address;
+				if (addresses !== null) {
+					return (
+						<div key={index}>
+							<Typography
+								align="center"
+								gutterBottom
+								style={styles.address}
+								variant="h5"
+							>
+							{addresses.address1}
+							</Typography>
+						</div>
+					)
+				}
+			}
+		})
+		return result;
+	}
 
-        <CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
+	render() {
+		const { slides } = this.props;
 
-      </div>
-    );
-  }
+		return (
+			<div style={styles.carousel}>
+				<CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
+				{this.renderImages(slides)}
+				<CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
+				{this.renderAddress(slides)}
+			</div>
+		);
+	}
 }
 
 

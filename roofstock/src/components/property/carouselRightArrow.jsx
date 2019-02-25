@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const CarouselRightArrow = props => {
-    return (
-        <a
-            href="#"
-            className="carousel__arrow carousel__arrow--right"
-            onClick={this.props.onClick}
-        >
-        <span className="fa fa-2x fa-angle-right" />
-        </a>
-    )
+const styles = {
+	arrowRight: {
+	    position: "absolute",
+	    top: "50%",
+	    display: "block",
+	    color: "rgb(221, 221, 221)",
+	    cursor: "pointer",
+	    transform: "translateY(-50%)",
+		right: "30%"
+	}
+}
+
+class CarouselRightArrow extends Component {
+	render() {
+		return (
+			<Link
+				onClick={this.props.onClick}
+				to="#"
+				style={styles.arrowRight}
+			>
+				<span className="fa fa-2x fa-angle-right" />
+			</Link>
+		);
+	}
 }
 
 export default CarouselRightArrow;
