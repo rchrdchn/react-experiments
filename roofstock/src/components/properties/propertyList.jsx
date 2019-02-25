@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import {
+    getPrice,
+    getRent,
+    getGrossYield,
+    getYear
+} from '../helper/helper';
+import PropertyPrice from '../properties/propertyPrice';
+import NoImage from '../../images/empty-photo.png';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,58 +16,65 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-});
-
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
+const styles = {
+    propertyImage: {
+        maxWidth: "150px",
+        minHeight: "100px",
+        border: "2px solid rgb(221, 221, 221)",
+        borderRadius: "5px",
+        boxShadow: "2px 2px 4px 1px rgba(108, 108, 108, 0.75)"
+    },
+    paddingTable: {
+        marginTop: "50px",
+        padding: "0px 40px"
+    },
+    paddingHead: {
+        paddingTop: "20px",
+        paddingBottom: "20px"
+    }
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+class PropertyList extends Component {
+    render() {
+        const { properties } = this.props.items;
 
-class SimpleTable extends Component {
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat (g)</TableCell>
-            <TableCell align="right">Carbs (g)</TableCell>
-            <TableCell align="right">Protein (g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+        return (
+            <div style={styles.paddingTable}>
+                <Paper>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell align="center">Address</TableCell>
+                                <TableCell align="center">Listing Price</TableCell>
+                                <TableCell align="center">Monthly Rent</TableCell>
+                                <TableCell align="center">Gross Yield</TableCell>
+                                <TableCell align="center">Year</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        {properties.map((item, index) => (
+                            <TableRow key={item.id}>
+                            <TableCell component="th" scope="row" style={styles.paddingHead}>
+                                <img
+                                    src={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
+                                    alt={item.address.address1}
+                                    style={styles.propertyImage}
+                                />
+                            </TableCell>
+                            <TableCell align="center">{item.address.address1}</TableCell>
+                            <TableCell align="center"><PropertyPrice price={getPrice(item)} /></TableCell>
+                            <TableCell align="center">{getRent(item)}</TableCell>
+                            <TableCell align="center">{getGrossYield(item)}</TableCell>
+                            <TableCell align="center">{getYear(item)}</TableCell>
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
+            </div>
+        )
+    }
 }
+
+export default PropertyList;

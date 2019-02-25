@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import {
+    getPrice,
+    getRent,
+    getGrossYield,
+    getYear
+} from '../helper/helper';
 import PropertyAddress from './propertyAddress';
 import PropertyPrice from './propertyPrice';
 import PropertyDetails from './propertyDetails';
-import PropertyContainer from '../property/propertyContainer';
+import NoImage from '../../images/empty-photo.png';
 import { Paper, Grid, Card } from '@material-ui/core';
 import { CardActionArea, CardContent, CardMedia } from '@material-ui/core';
-import NoImage from '../../images/empty-photo.png'
 
 const styles = {
 	card: {
@@ -32,34 +37,6 @@ const styles = {
 }
 
 class PropertiesContainer extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-	getPrice(item) {
-		const price = item.financial;
-		if(price !== null) {
-			const listedPrice = price.listPrice.toFixed(2);
-			return listedPrice;
-		}
-	}
-
-	getRent(item){ 
-		const rent = item.financial;
-		return rent !== null && rent.monthlyRent.toFixed(2);
-	}
-
-	getYear(item) {
-		const physical = item.physical;
-		return physical !== null && physical.yearBuilt;
-	}
-
-	getGrossYield(item){
-		if (this.getRent(item) && this.getPrice(item)) {
-			return `${((this.getRent(item) * 12 / this.getPrice(item)) * 100).toFixed(2)}%`;
-		}
-	}
-
 	render() {
 		const { properties } = this.props.items;
 
@@ -85,11 +62,11 @@ class PropertiesContainer extends Component {
 												primary={item.address.address1}
 												secondary={`${item.address.city}, ${item.address.state}`}
 											/>
-											<PropertyPrice price={this.getPrice(item)} />
+											<PropertyPrice price={getPrice(item)} />
 											<PropertyDetails
-												rent={this.getRent(item)}
-												grossYield={this.getGrossYield(item)}
-												year={this.getYear(item)}
+												rent={getRent(item)}
+												grossYield={getGrossYield(item)}
+												year={getYear(item)}
 											/>
 										</CardContent>
 									</CardActionArea>
