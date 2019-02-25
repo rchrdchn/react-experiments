@@ -26,6 +26,33 @@ const styles = {
 }
 
 class PropertiesContainer extends Component {
+	constructor(props) {
+		super(props);
+	}
+
+	getPrice(item) {
+		const price = item.financial;
+		if(price !== null) {
+			const listedPrice = price.listPrice.toFixed(2);
+			return listedPrice;
+		}
+	}
+
+	getRent(item){ 
+		const rent = item.financial;
+		return rent !== null && rent.monthlyRent.toFixed(2);
+	}
+
+	getYear(item) {
+		const physical = item.physical;
+		return physical !== null && physical.yearBuilt;
+	}
+
+	getGrossYield(item){
+		if (this.getRent(item) && this.getPrice(item)) {
+			return `${((this.getRent(item) * 12 / this.getPrice(item)) * 100).toFixed(2)}%`;
+		}
+	}
 
 	render() {
 		const { properties } = this.props.items;
@@ -33,66 +60,37 @@ class PropertiesContainer extends Component {
 		return (
 			<div>
 			<Grid container spacing={24}>
-				{properties.map((item, index) => {
-					function yearExist() {
-						const physical = item.physical;
-						if(physical !== null) {
-							return `${physical.yearBuilt}`;
-						}
-					}
-
-					function priceExist(){
-						const price = item.financial;
-						if(price !== null) {
-							const listedPrice = price.listPrice.toFixed(2);
-							return listedPrice;
-						}
-
-					}
-
-					function rentExist(){ 
-						const rent = item.financial;
-						if(rent !== null) {
-							return rent.monthlyRent.toFixed(2);
-						}
-					}
-
-					function grossYield(){
-						if (rentExist() && priceExist()) {
-							return `${((rentExist() * 12 / priceExist()) * 100).toFixed(2)}%`;
-						}
-					}
-				
-					return (
-				        <Grid item key={index} md={3}>
-				          	<Paper>
-								<Link to={`/property/${item.id}`}>
-								<Card style={styles.height}>
-									<CardActionArea style={styles.card}>
-										<CardMedia
-											style={styles.media}
-											image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
-											title={item.address.address1}
+			{properties.map((item, index) => {
+				return (
+			        <Grid item key={index} md={4}>
+			          	<Paper>
+							<Link to={`/property/${item.id}`}>
+							<Card style={styles.height}>
+								<CardActionArea style={styles.card}>
+									<CardMedia
+										style={styles.media}
+										image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
+										title={item.address.address1}
+									/>
+									<CardContent>
+										<PropertyAddress
+											primary={item.address.address1}
+											secondary={`${item.address.city}, ${item.address.state}`}
 										/>
-										<CardContent>
-											<PropertyAddress
-												primary={item.address.address1}
-												secondary={`${item.address.city}, ${item.address.state}`}
-											/>
-											<PropertyPrice price={priceExist()} />
-											<PropertyDetails
-												rent={rentExist()}
-												grossYield={grossYield()}
-												year={yearExist()}
-											/>
-										</CardContent>
-									</CardActionArea>
-								</Card>
-				        		</Link>
-							</Paper>
-				        </Grid>
-						)
-					})}
+										<PropertyPrice price={this.getPrice(item)} />
+										<PropertyDetails
+											rent={this.getRent(item)}
+											grossYield={this.getGrossYield(item)}
+											year={this.getYear(item)}
+										/>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+			        		</Link>
+						</Paper>
+			        </Grid>
+					)
+				})}
 				</Grid>
 			</div>
 		)
