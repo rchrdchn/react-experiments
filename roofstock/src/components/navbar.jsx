@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
+import Toggle from './toggleViews';
 
 const styles = {
 	wrapper: {
@@ -17,6 +18,7 @@ const Navbar = () => {
 			<Link to="/">
 			<img src={logo} alt="logo" style={styles.logo} />
 			</Link>
+			<Toggle />
 		</div>
 	)
 }

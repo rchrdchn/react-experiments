@@ -48,16 +48,16 @@ class RoofContainer extends Component {
 		} else {
 			return (
 				<BrowserRouter>
-				<div>
-					<Navbar />
-					<Route path="/" exact render={
-						props => <PropertiesContainer {...props} items={items} />
-					} />
-					<Route path="/property/:id" exact component={
-						props => <PropertyContainer {...props} items={items} />
-					} />
-					<Footer />
-				</div>
+					<div>
+						<Navbar />
+						<Route path="/" exact render={
+							props => <PropertiesContainer {...props} items={items} />
+						} />
+						<Route path="/property/:id" exact component={
+							props => <PropertyContainer {...props} items={items} />
+						} />
+						<Footer />
+					</div>
 				</BrowserRouter>
 			)
 		}
