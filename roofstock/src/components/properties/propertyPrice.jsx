@@ -6,6 +6,16 @@ const styles = {
     	fontSize: '14px',
     	fontWeight: 400,
     	textAlign: 'left'
+	},
+	noInfo: {
+		backgroundColor: "rgb(241, 115, 34)",
+		border: "2px solid rgb(241, 115, 34)",
+		borderRadius: "5px",
+		color: "#FFFFFF",
+		display: "inline-block",
+		fontWeight: 500,
+		marginTop: "30px",
+		padding: "4px 8px"
 	}
 }
 
@@ -17,7 +27,7 @@ const PropertyPrice = props => {
 			<Typography
 				gutterBottom
 				variant="subtitle1"
-				style={styles.container}
+				style={price ? styles.container : styles.noInfo}
 			>
 			{price ? `Listed at $${price}` : "Contact Us"}
 			</Typography>

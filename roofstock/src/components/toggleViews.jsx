@@ -39,7 +39,6 @@ class Toggle extends Component {
 
 	renderCardView(e) {
 		e.preventDefault();
-
 		console.log("cards: ", this.state.showCards, "list: ", this.state.showList)
 
 		this.setState({
@@ -50,7 +49,6 @@ class Toggle extends Component {
 
 	renderListView(e) {
 		e.preventDefault();
-
 		console.log("list: ", this.state.showList, "cards: ", this.state.showCards)
 
 		this.setState({
@@ -79,7 +77,7 @@ class Toggle extends Component {
 					style={showList ? styles.toggleActive : styles.toggle}>
 				</Menu>
 				</span>
-				<p>{showCards === true ? "showCards: ON" : "showList: ON"}</p>
+				<p>{showCards === true ? "Cards View: ON" : "List View: ON"}</p>
 			</div>
 		)
 	}

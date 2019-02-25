@@ -19,7 +19,10 @@ const styles = {
         display: "block"
     },
     slideImage: {
-        height: '200px'
+        height: "200px",
+        border: "2px solid rgb(221, 221, 221)",
+        borderRadius: "5px",
+        boxShadow: "2px 2px 4px 1px rgba(108, 108, 108, 0.75)"
     }
 }
 

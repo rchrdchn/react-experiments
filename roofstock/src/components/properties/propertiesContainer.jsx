@@ -10,19 +10,25 @@ import { CardActionArea, CardContent, CardMedia } from '@material-ui/core';
 import NoImage from '../../images/empty-photo.png'
 
 const styles = {
-  card: {
-    maxWidth: '640px'
-  },
-  media: {
-    height: '150px'
-  },
-  height: {
-  	// minHeight: '261px'
-  },
-  paper: {
-  	marginRight: '30px',
-  	marginLeft: '30px'
-  }
+	card: {
+		maxWidth: "640px"
+	},
+	media: {
+		height: "150px"
+	},
+	paper: {
+		marginRight: "30px",
+		marginLeft: "30px"
+	},
+	height: {
+		height: "300px"
+	},
+	width: {
+		width: "290px"
+	},
+	padding: {
+		padding: "0px 40px"
+	}
 }
 
 class PropertiesContainer extends Component {
@@ -59,38 +65,40 @@ class PropertiesContainer extends Component {
 
 		return (
 			<div>
-			<Grid container spacing={24}>
-			{properties.map((item, index) => {
-				return (
-			        <Grid item key={index} md={4}>
-			          	<Paper>
-							<Link to={`/property/${item.id}`}>
-							<Card style={styles.height}>
-								<CardActionArea style={styles.card}>
-									<CardMedia
-										style={styles.media}
-										image={item.mainImageUrl ? item.mainImageUrl : 'https://roofstock-cdn3.azureedge.net/rs-apps/assets/images/icons/houses/empty-photo-2d253de73ef2cfa115dc3f769f55ec14.png'}
-										title={item.address.address1}
-									/>
-									<CardContent>
-										<PropertyAddress
-											primary={item.address.address1}
-											secondary={`${item.address.city}, ${item.address.state}`}
+				<Grid container spacing={24} style={styles.padding}>
+				{properties.map((item, index) => {
+					const URLLink = item.mainImageUrl ? `/property/${item.id}` : "/";
+
+					return (
+				        <Grid item key={index} md={4} style={styles.width}>
+				          	<Paper>
+								<Link to={URLLink}>
+								<Card style={styles.height}>
+									<CardActionArea style={styles.card}>
+										<CardMedia
+											style={styles.media}
+											image={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
+											title={item.address.address1}
 										/>
-										<PropertyPrice price={this.getPrice(item)} />
-										<PropertyDetails
-											rent={this.getRent(item)}
-											grossYield={this.getGrossYield(item)}
-											year={this.getYear(item)}
-										/>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-			        		</Link>
-						</Paper>
-			        </Grid>
-					)
-				})}
+										<CardContent style={styles.height}>
+											<PropertyAddress
+												primary={item.address.address1}
+												secondary={`${item.address.city}, ${item.address.state}`}
+											/>
+											<PropertyPrice price={this.getPrice(item)} />
+											<PropertyDetails
+												rent={this.getRent(item)}
+												grossYield={this.getGrossYield(item)}
+												year={this.getYear(item)}
+											/>
+										</CardContent>
+									</CardActionArea>
+								</Card>
+				        		</Link>
+							</Paper>
+				        </Grid>
+						)
+					})}
 				</Grid>
 			</div>
 		)

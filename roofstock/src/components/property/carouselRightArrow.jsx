@@ -7,7 +7,7 @@ const styles = {
 	    position: "absolute",
 	    top: "50%",
 	    display: "block",
-	    color: "rgb(221, 221, 221)",
+	    color: "rgb(108, 108, 108)",
 	    cursor: "pointer",
 	    transform: "translateY(-50%)",
 		right: "30%"
