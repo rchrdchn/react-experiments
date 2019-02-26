@@ -3,6 +3,7 @@ import CarouselLeftArrow from './carouselLeftArrow'
 import CarouselRightArrow from './carouselRightArrow'
 import CarouselSlider from './carouselSlider'
 import Typography from '@material-ui/core/Typography';
+import NoImage from '../../images/empty-photo.png';
 
 const styles = {
 	list: {
@@ -11,14 +12,14 @@ const styles = {
 		listStyleType: "none"
 	},
 	carousel: {
-		position: "relative"
+		position: "relative",
+		marginTop: "150px"
 	},
 	address: {
 		marginTop: "20px"
 	}
 }
 
-// Carousel wrapper component
 class Carousel extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +34,6 @@ class Carousel extends Component {
 
 	goToSlide(index) {
 		this.setState({ activeIndex: index });
-		console.log("goToSlide---1")
 	}
 
 	goToPrevSlide(e) {
@@ -43,12 +43,9 @@ class Carousel extends Component {
 		let { slides } = this.props;
 		let slidesLength = slides.length;
 
-		if (index < 1) {
-			index = slidesLength;
-		}
+		if (index < 1) index = slidesLength;
 
 		--index;
-		console.log("goToPrevSlide---2", index)
 
 		this.setState({ activeIndex: index });
 	}
@@ -60,12 +57,9 @@ class Carousel extends Component {
 		let { slides } = this.props;
 		let slidesLength = slides.length - 1;
 
-		if (index === slidesLength) {
-			index = -1;
-		}
+		if (index === slidesLength) index = -1;
 
 		++index;
-		console.log("goToNextSlide---3", index, "slidesLength: ", slidesLength, "slides: ", slides)
 
 		this.setState({ activeIndex: index });
 	}
@@ -75,19 +69,10 @@ class Carousel extends Component {
 		const result = properties.map(item => {
 			if (item.id == URLPath) {
 				const images = item.resources;
-				if (images !== null) {
+				if (!!images) {
 					const image = images.photos;
 					return image.map((photo, index) => {
-						return (
-							<CarouselSlider
-				              key={index}
-				              index={index}
-				              activeIndex={this.state.activeIndex}
-				              slide={photo.urlSmall}
-				              path={this.props.match}
-				              filename={photo.filename}
-				            />
-						)
+						return this.renderImageContent(photo, index);
 					})
 				}
 			}
@@ -95,28 +80,29 @@ class Carousel extends Component {
 		return result;
 	}
 
+	renderImageContent(item, index) {
+		return <CarouselSlider key={index} index={index} activeIndex={this.state.activeIndex}
+            	slide={item.urlSmall} path={this.props.match} filename={item.filename} />;
+	}
+
 	renderAddress(properties) {
 		const URLPath = this.props.path.params.id;
 		const result = properties.map((item, index) => {
 			if (item.id == URLPath) {
 				const addresses = item.address;
-				if (addresses !== null) {
-					return (
-						<div key={index}>
-							<Typography
-								align="center"
-								gutterBottom
-								style={styles.address}
-								variant="h5"
-							>
-							{addresses.address1}
-							</Typography>
-						</div>
-					)
-				}
+				return this.renderAddressContent(addresses, index);
 			}
 		})
 		return result;
+	}
+
+	renderAddressContent(item, index) {
+		return !!item &&
+			<div key={index}>
+				<Typography align="center" gutterBottom style={styles.address} variant="h5">
+				{item.address1}
+				</Typography>
+			</div>
 	}
 
 	render() {

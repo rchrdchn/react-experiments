@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
@@ -7,14 +7,16 @@ import {
     getGrossYield,
     getYear
 } from '../helper/helper';
+import {
+    Table,
+    TableBody,
+    TableHead,
+    TableRow,
+    TableCell,
+    Paper
+} from '@material-ui/core';
 import PropertyPrice from '../properties/propertyPrice';
 import NoImage from '../../images/empty-photo.png';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 const styles = {
     row: {

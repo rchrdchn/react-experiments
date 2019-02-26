@@ -1,23 +1,28 @@
 export function getPrice(item) {
     const price = item.financial;
-    if(price !== null) {
-        const listedPrice = price.listPrice.toFixed(2);
-        return listedPrice;
+    if(!!price) {
+        const listedPrice = price.listPrice;
+        // console.log(addComma(listedPrice))
+        return addComma(listedPrice);
     }
 }
 
 export function getRent(item){ 
     const rent = item.financial;
-    return rent !== null && rent.monthlyRent.toFixed(2);
+    return !!rent && addComma(rent.monthlyRent);
 }
 
 export function getGrossYield(item){
     if (getRent(item) && getPrice(item)) {
-        return `${((getRent(item) * 12 / getPrice(item)) * 100).toFixed(2)}%`;
+        return `${(parseInt(getRent(item)) * 12 / parseInt((getPrice(item))) / 10).toFixed(2)}%`;
     }
 }
 
 export function getYear(item) {
     const physical = item.physical;
-    return physical !== null && physical.yearBuilt;
+    return !!physical && physical.yearBuilt;
+}
+
+export function addComma(number) {
+    return `${Number(number.toFixed(0)).toLocaleString().split(/\s/).join(',')}.00`;
 }
