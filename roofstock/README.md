@@ -19,8 +19,8 @@ Here are the step-by-step instructions on how to run the final project as well a
 [http://dev1-sample.azurewebsites.net/properties.json](http://dev1-sample.azurewebsites.net/properties.json)
              
 * Display the properties from the data-source above in a card/list view with following fields, user should be able to toggle between card/list views.
- 
-## Properties (card/list views) Fields
+
+## Properties (card/list views) Fields
 
 * Property Image _(mainImageUrl)_
 * Address  _(address)_
@@ -29,7 +29,7 @@ Here are the step-by-step instructions on how to run the final project as well a
 * Monthly Rent $ (formatted to two decimal places - e.g. $1,234.00) . _(financial.monthlyRent)_
 * Gross Yield % ('Monthly Rent' * 12 / 'List Price') - e.g. 12.55% (calculated)
  
-## Property Detail
+## Property Detail
 
 * When a user clicks on a property card view or list view, navigate to property detail route and display
 * Address of property _(address)_
@@ -44,6 +44,12 @@ __Include a zip file or a link to download the zip for the solution in the email
 
 
 ## Additional Details
+
+**Tech Stack**
+* ReactJS
+* React Router
+* Material-UI
+* Font-Awesome
 
 Project GitHub Repository: [Roofstock](https://github.com/rchrdchn/react-experiments/tree/master/roofstock)
 
