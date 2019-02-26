@@ -18,7 +18,7 @@ const PropertyDetails = props => {
 				align="left"
 				style={styles.fontWeight}
 			>
-			{rent && `Rent: $${rent} |`}  {grossYield && `Gross Yield: ${grossYield}`}
+			{rent && `Rent: ${rent} |`}  {grossYield && `Gross Yield: ${grossYield}`}
 			</Typography>
 			<Typography
 				gutterBottom

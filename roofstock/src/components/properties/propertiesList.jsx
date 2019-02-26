@@ -5,7 +5,8 @@ import {
     getPrice,
     getRent,
     getGrossYield,
-    getYear
+    getYear,
+    addComma
 } from '../helper/helper';
 import {
     Table,
@@ -77,9 +78,9 @@ const PropertiesList = props => {
                         </TableCell>
                         <TableCell align="center" style={styles.tableRow}>{item.address.address1}</TableCell>
                         <TableCell align="center" style={styles.tableRow}>
-                            <PropertyPrice price={getPrice(item)} />
+                            <PropertyPrice price={getPrice(item, true)} />
                         </TableCell>
-                        <TableCell align="center" style={styles.tableRow}>{getRent(item)}</TableCell>
+                        <TableCell align="center" style={styles.tableRow}>{getRent(item, true)}</TableCell>
                         <TableCell align="center" style={styles.tableRow}>{getGrossYield(item)}</TableCell>
                         <TableCell align="center" style={styles.tableRow}>{getYear(item)}</TableCell>
                         </TableRow>

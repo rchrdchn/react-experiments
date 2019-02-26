@@ -1,28 +1,37 @@
-export function getPrice(item) {
-    const price = item.financial;
-    if(!!price) {
+export function getPrice(property, comma = false, fractions = 2) {
+    const price = property.financial;
+    if (!!price && comma) {
         const listedPrice = price.listPrice;
-        // console.log(addComma(listedPrice))
-        return addComma(listedPrice);
+        return `$${toLocaleFixed(listedPrice, fractions)}`;
+    } else if (!!price) {
+        const listedPrice = price.listPrice;
+        return listedPrice;
     }
 }
 
-export function getRent(item){ 
-    const rent = item.financial;
-    return !!rent && addComma(rent.monthlyRent);
-}
-
-export function getGrossYield(item){
-    if (getRent(item) && getPrice(item)) {
-        return `${(parseInt(getRent(item)) * 12 / parseInt((getPrice(item))) / 10).toFixed(2)}%`;
+export function getRent(property, comma = false, fractions = 2){ 
+    const rent = property.financial;
+    if (!!rent && comma) {
+        return `$${toLocaleFixed(rent.monthlyRent, fractions)}`;
+    } else if (!!rent) {
+        return rent.monthlyRent.toFixed(2);
     }
 }
 
-export function getYear(item) {
-    const physical = item.physical;
+export function getGrossYield(property){
+    if (getRent(property) && getPrice(property)) {
+        return `${((getRent(property) * 12 / getPrice(property)) * 100).toFixed(2)}%`;
+    }
+}
+
+export function getYear(property) {
+    const physical = property.physical;
     return !!physical && physical.yearBuilt;
 }
 
-export function addComma(number) {
-    return `${Number(number.toFixed(0)).toLocaleString().split(/\s/).join(',')}.00`;
+function toLocaleFixed(helper, fractions) {
+    return helper.toLocaleString(undefined, {
+        minimumFractionDigits: fractions,
+        maximumFractionDigits: fractions
+    })
 }

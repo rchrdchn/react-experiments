@@ -29,7 +29,7 @@ const PropertyPrice = props => {
 				variant="subtitle1"
 				style={price ? styles.container : styles.noInfo}
 			>
-			{price ? `Listed at $${price}` : "Contact Us"}
+			{price ? `Listed at ${price}` : "Contact Us"}
 			</Typography>
 		</Fragment>
 	)

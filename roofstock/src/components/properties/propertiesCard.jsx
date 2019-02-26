@@ -62,9 +62,9 @@ const PropertiesCard = props => {
 											primary={item.address.address1}
 											secondary={`${item.address.city}, ${item.address.state}`}
 										/>
-										<PropertyPrice price={getPrice(item)} />
+										<PropertyPrice price={getPrice(item, true)} />
 										<PropertyDetails
-											rent={getRent(item)}
+											rent={getRent(item, true)}
 											grossYield={getGrossYield(item)}
 											year={getYear(item)}
 										/>
