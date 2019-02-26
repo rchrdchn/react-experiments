@@ -2,7 +2,7 @@
 
 __Coding Exercise: Front-end Developer: ReactJS__
 
-Step by step on how to run the final project
+Here are the step-by-step instructions on how to run the final project as well as the project description, details, and other notes.
 
 ## Installation
 
@@ -21,6 +21,7 @@ Step by step on how to run the final project
 * Display the properties from the data-source above in a card/list view with following fields, user should be able to toggle between card/list views.
  
 ## Properties (card/list views) Fields
+
 * Property Image _(mainImageUrl)_
 * Address  _(address)_
 * Year Built _(physical.yearbuilt)_
@@ -29,11 +30,13 @@ Step by step on how to run the final project
 * Gross Yield % ('Monthly Rent' * 12 / 'List Price') - e.g. 12.55% (calculated)
  
 ## Property Detail
+
 * When a user clicks on a property card view or list view, navigate to property detail route and display
 * Address of property _(address)_
 * Carousel that allows user to navigate between images _(resources.photos)_
 
 ## Note
+
 For styling inspiration, refer to [https://www.roofstock.com/investment-property-marketplace](https://www.roofstock.com/investment-property-marketplace).
 Application should be using ReactJS. You may use any styling solution to style the pages.
 
@@ -41,6 +44,7 @@ __Include a zip file or a link to download the zip for the solution in the email
 
 
 ## Additional Details
+
 Project GitHub Repository: [Roofstock](https://github.com/rchrdchn/react-experiments/tree/master/roofstock)
 
 **Richard Chan** | [GitHub Profile](https://github.com/rchrdchn) | [LinkedIn Profile](https://www.linkedin.com/in/rchrdchn/)
