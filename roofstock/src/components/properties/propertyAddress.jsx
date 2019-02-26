@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
@@ -37,6 +38,11 @@ const Address = props => {
 			</Typography>
 		</Fragment>
 	)
+}
+
+Address.propTypes = {
+	primary: PropTypes.string,
+	secondary: PropTypes.string
 }
 
 export default Address;

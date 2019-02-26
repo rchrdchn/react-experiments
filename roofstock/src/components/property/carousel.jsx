@@ -11,7 +11,8 @@ const styles = {
 		marginTop: "50px"
 	},
 	addressText: {
-		marginTop: "20px"
+		marginTop: "40px",
+		marginBottom: "100px"
 	},
 	noImage: {
 		textAlign: "center"

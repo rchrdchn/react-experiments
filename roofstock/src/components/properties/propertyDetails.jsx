@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
@@ -30,6 +31,12 @@ const PropertyDetails = props => {
 			</Typography>
 		</Fragment>
 	)
+}
+
+PropertyDetails.propTypes = {
+	rent: PropTypes.string,
+	grossYield: PropTypes.string,
+	year: PropTypes.number
 }
 
 export default PropertyDetails;
