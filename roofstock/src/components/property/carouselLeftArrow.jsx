@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 const styles = {
 	arrowLeft: {
-	    position: "absolute",
-	    top: "50%",
-	    display: "block",
 	    color: "rgb(108, 108, 108)",
 	    cursor: "pointer",
+	    display: "block",
+		left: "20%",
+	    position: "absolute",
 	    transform: "translateY(-50%)",
-		left: "30%"
+	    top: "50%"
 	}
 }
 

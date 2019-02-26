@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 const styles = {
 	arrowRight: {
-	    position: "absolute",
-	    top: "50%",
-	    display: "block",
 	    color: "rgb(108, 108, 108)",
 	    cursor: "pointer",
+	    display: "block",
+	    position: "absolute",
+		right: "20%",
 	    transform: "translateY(-50%)",
-		right: "30%"
+	    top: "50%"
 	}
 }
 

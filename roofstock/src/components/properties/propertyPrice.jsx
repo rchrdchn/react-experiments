@@ -3,9 +3,10 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
 	container: {
-    	fontSize: '14px',
+    	fontSize: '16px',
     	fontWeight: 400,
-    	textAlign: 'left'
+    	textAlign: "center",
+    	display: "inline-block"
 	},
 	noInfo: {
 		backgroundColor: "rgb(241, 115, 34)",

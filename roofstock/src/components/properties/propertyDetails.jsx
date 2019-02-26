@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
-	fontWeight: {
-		fontSize: '14px',
+	typography: {
+		fontSize: '16px',
 		fontWeight: 400
 	}
 }
@@ -16,7 +16,7 @@ const PropertyDetails = props => {
 				gutterBottom
 				variant="subtitle2"
 				align="left"
-				style={styles.fontWeight}
+				style={styles.typography}
 			>
 			{rent && `Rent: ${rent} |`}  {grossYield && `Gross Yield: ${grossYield}`}
 			</Typography>
@@ -24,7 +24,7 @@ const PropertyDetails = props => {
 				gutterBottom
 				variant="subtitle2"
 				align="left"
-				style={styles.fontWeight}
+				style={styles.typography}
 			>
 			 {year && `Built: ${year}`}
 			</Typography>

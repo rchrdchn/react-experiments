@@ -6,17 +6,15 @@ import Typography from '@material-ui/core/Typography';
 import NoImage from '../../images/empty-photo.png';
 
 const styles = {
-	list: {
-		padding: 0,
-		margin: 0,
-		listStyleType: "none"
-	},
-	carousel: {
+	container: {
 		position: "relative",
 		marginTop: "150px"
 	},
-	address: {
+	addressText: {
 		marginTop: "20px"
+	},
+	noImage: {
+		textAlign: "center"
 	}
 }
 
@@ -27,16 +25,11 @@ class Carousel extends Component {
 		this.state = {
 			activeIndex: 0
 		};
-		this.goToSlide = this.goToSlide.bind(this);
-		this.goToPrevSlide = this.goToPrevSlide.bind(this);
-		this.goToNextSlide = this.goToNextSlide.bind(this);
+		this.previousSlide = this.previousSlide.bind(this);
+		this.nextSlide = this.nextSlide.bind(this);
 	}
 
-	goToSlide(index) {
-		this.setState({ activeIndex: index });
-	}
-
-	goToPrevSlide(e) {
+	previousSlide(e) {
 		e.preventDefault();
 
 		let index = this.state.activeIndex;
@@ -50,7 +43,7 @@ class Carousel extends Component {
 		this.setState({ activeIndex: index });
 	}
 
-	goToNextSlide(e) {
+	nextSlide(e) {
 		e.preventDefault();
 
 		let index = this.state.activeIndex;
@@ -69,7 +62,9 @@ class Carousel extends Component {
 		const result = properties.map(item => {
 			if (item.id == URLPath) {
 				const images = item.resources;
-				if (!!images) {
+				if (images.photos.length === 0) {
+					return this.renderNoImage();
+				} else if (!!images) {
 					const image = images.photos;
 					return image.map((photo, index) => {
 						return this.renderImageContent(photo, index);
@@ -80,9 +75,17 @@ class Carousel extends Component {
 		return result;
 	}
 
-	renderImageContent(item, index) {
+	renderImageContent(image, index) {
 		return <CarouselSlider key={index} index={index} activeIndex={this.state.activeIndex}
-            	slide={item.urlSmall} path={this.props.match} filename={item.filename} />;
+            	slide={image.urlMedium} path={this.props.match} filename={image.filename} />;
+	}
+
+	renderNoImage() {
+		return (
+			<div style={styles.noImage}>
+				<img src={NoImage} alt="No Images Available" />
+			</div>
+		)
 	}
 
 	renderAddress(properties) {
@@ -96,11 +99,11 @@ class Carousel extends Component {
 		return result;
 	}
 
-	renderAddressContent(item, index) {
-		return !!item &&
+	renderAddressContent(address, index) {
+		return !!address &&
 			<div key={index}>
-				<Typography align="center" gutterBottom style={styles.address} variant="h5">
-				{item.address1}
+				<Typography align="center" gutterBottom style={styles.addressText} variant="h5">
+				{address.address1}
 				</Typography>
 			</div>
 	}
@@ -109,10 +112,10 @@ class Carousel extends Component {
 		const { slides } = this.props;
 
 		return (
-			<div style={styles.carousel}>
-				<CarouselLeftArrow onClick={e => this.goToPrevSlide(e)} />
+			<div style={styles.container}>
+				<CarouselLeftArrow onClick={e => this.previousSlide(e)} />
 				{this.renderImages(slides)}
-				<CarouselRightArrow onClick={e => this.goToNextSlide(e)} />
+				<CarouselRightArrow onClick={e => this.nextSlide(e)} />
 				{this.renderAddress(slides)}
 			</div>
 		);

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropertyPrice from '../properties/propertyPrice';
+import NoImage from '../../images/empty-photo.png';
 import {
     getPrice,
     getRent,
@@ -16,10 +18,12 @@ import {
     TableCell,
     Paper
 } from '@material-ui/core';
-import PropertyPrice from '../properties/propertyPrice';
-import NoImage from '../../images/empty-photo.png';
 
 const styles = {
+    container: {
+        marginTop: "60px",
+        padding: "0px 40px"
+    },
     row: {
         backgroundColor: 'rgb(248, 248, 248)'
     },
@@ -30,11 +34,7 @@ const styles = {
         borderRadius: "5px",
         boxShadow: "2px 2px 4px 1px rgba(108, 108, 108, 0.75)"
     },
-    paddingTable: {
-        marginTop: "60px",
-        padding: "0px 40px"
-    },
-    paddingHead: {
+    tableCellHeader: {
         paddingTop: "20px",
         paddingBottom: "20px"
     },
@@ -51,23 +51,23 @@ const PropertiesList = props => {
     const { properties } = props.items;
     
     return (
-        <div style={styles.paddingTable}>
+        <div style={styles.container}>
             <Paper>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
-                            <TableCell align="center" style={styles.tableHeader}>Address</TableCell>
-                            <TableCell align="center" style={styles.tableHeader}>Price (US$)</TableCell>
-                            <TableCell align="center" style={styles.tableHeader}>Monthly Rent (US$)</TableCell>
-                            <TableCell align="center" style={styles.tableHeader}>Gross Yield (%)</TableCell>
-                            <TableCell align="center" style={styles.tableHeader}>Year</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>ADDRESS</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>PRICE (US$)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>MONTHLY RENT (US$)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>GROSS YIELD (%)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>YEAR</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                     {properties.map((item, index) => (
                         <TableRow key={item.id} style={styles.row}>
-                        <TableCell component="th" scope="row" style={styles.paddingHead}>
+                        <TableCell component="th" scope="row" style={styles.tableCellHeader}>
                             <Link to={item.mainImageUrl ? `/property/${item.id}` : '/list'}>
                             <img
                                 src={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}

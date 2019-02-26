@@ -8,7 +8,8 @@ import PropertiesList from './properties/propertiesList';
 import PropertyContainer from './property/propertyContainer';
 
 const styles = {
-	loadingText: {
+	loadingTex: {
+		color: "rgb(241, 115, 34)",
 		position: "absolute",
 		top: "50%",
 		left: "50%",
@@ -47,7 +48,7 @@ class RoofContainer extends Component {
 		if(!isLoaded) {
 			return (
 				<div>
-					<h2 style={styles.loadingText}>Loading...</h2>
+					<h2 style={styles.loadingTex}>Loading...</h2>
 				</div>
 			)
 		} else {

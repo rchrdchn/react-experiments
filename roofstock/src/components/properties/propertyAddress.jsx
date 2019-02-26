@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
-	primary: {
-		fontSize: '14px',
+	primaryText: {
+		fontSize: '16px',
 		fontWeight: '500',
 		marginBottom: '0'
 	},
-	secondary: {
+	secondaryText: {
 		color: 'rgb(102, 102, 102)',
-		fontSize: '12px',
+		fontSize: '14px',
 		fontWeight: '400'
 	}
 }
@@ -23,7 +23,7 @@ const Address = props => {
 				gutterBottom
 				variant="subtitle1"
 				align="left"
-				style={styles.primary}
+				style={styles.primaryText}
 			>
 			{primary}
 			</Typography>
@@ -31,7 +31,7 @@ const Address = props => {
 				gutterBottom
 				variant="subtitle2"
 				align="left"
-				style={styles.secondary}
+				style={styles.secondaryText}
 			>
 			{secondary}
 			</Typography>
