@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import ViewModule from '@material-ui/icons/ViewModule';
 import Menu from '@material-ui/icons/Menu';
 
 const styles = {
 	wrapper: {
-    	textAlign: "right",
-		margin: "10px 20px",
-		float: "right"
+		position: "absolute",
+		margin: "0px 40px",
+		right: 0,
+		top: "45px"
 	},
 	toggle: {
 		color: "rgb(221, 221, 221)",
@@ -15,7 +17,7 @@ const styles = {
 		borderRadius: "5px"
 	},
 	toggleActive: {
-		color: "#F17322",
+		color: "rgb(241, 115, 34)",
 		border: "2px solid rgb(241, 115, 34)",
 		borderRadius: "5px"
 	},
@@ -24,63 +26,31 @@ const styles = {
 	}
 }
 
-class Toggle extends Component {
-	constructor(props) {
-		super(props);
+const Toggle = () => {
+	const listPath = window.location.pathname === '/list';
 
-		this.state = {
-			showCards: true,
-			showList: false
-		}
-
-		this.renderCardView = this.renderCardView.bind(this);
-		this.renderListView = this.renderListView.bind(this);
-	}
-
-	renderCardView(e) {
-		e.preventDefault();
-		console.log("cards: ", this.state.showCards, "list: ", this.state.showList)
-
-		this.setState({
-			showCards: true,
-			showList: false
-		})
-	}
-
-	renderListView(e) {
-		e.preventDefault();
-		console.log("list: ", this.state.showList, "cards: ", this.state.showCards)
-
-		this.setState({
-			showCards: false,
-			showList: true
-		})
-	}
-
-	render() {
-		const { showCards, showList } = this.state;
-
-		return (
-			<div style={styles.wrapper}>
+	return (
+		<div style={styles.wrapper}>
+			<Link to="/">
 				<span style={styles.margin}>
 				<ViewModule
-					onClick={this.renderCardView}
 					fontSize="large"
-					style={showCards ? styles.toggleActive : styles.toggle}
+					style={!listPath ? styles.toggleActive : styles.toggle}
 				>
 				</ViewModule>
 				</span>
+			</Link>
+			<Link to="/list">
 				<span style={styles.margin}>
 				<Menu
-					onClick={this.renderListView}
 					fontSize="large"
-					style={showList ? styles.toggleActive : styles.toggle}>
+					style={listPath ? styles.toggleActive : styles.toggle}>
 				</Menu>
 				</span>
-				<p>{showCards === true ? "Cards View: ON" : "List View: ON"}</p>
-			</div>
-		)
-	}
+			</Link>
+
+		</div>
+	)
 }
 
 export default Toggle;
