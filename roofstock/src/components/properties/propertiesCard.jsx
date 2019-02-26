@@ -27,13 +27,13 @@ const styles = {
 		maxWidth: "640px"
 	},
 	cardMedia: {
-		height: "150px"
+		height: "190px"
 	},
 	cardContentHeight: {
 		height: "175px"
 	},
 	cardHeight: {
-		height: "340px"
+		height: "375px"
 	},
 	innerGrid: {
 		width: "290px"

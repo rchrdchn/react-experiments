@@ -8,7 +8,7 @@ import NoImage from '../../images/empty-photo.png';
 const styles = {
 	container: {
 		position: "relative",
-		marginTop: "150px"
+		marginTop: "50px"
 	},
 	addressText: {
 		marginTop: "20px"
@@ -31,30 +31,33 @@ class Carousel extends Component {
 
 	previousSlide(e) {
 		e.preventDefault();
-
-		let index = this.state.activeIndex;
 		let { slides } = this.props;
-		let slidesLength = slides.length;
-
-		if (index < 1) index = slidesLength;
-
-		--index;
-
-		this.setState({ activeIndex: index });
+		this.checkSlidesLength(slides, true, false);
 	}
 
 	nextSlide(e) {
 		e.preventDefault();
-
-		let index = this.state.activeIndex;
 		let { slides } = this.props;
-		let slidesLength = slides.length - 1;
+		this.checkSlidesLength(slides, false, true);
+	}
 
-		if (index === slidesLength) index = -1;
-
-		++index;
-
-		this.setState({ activeIndex: index });
+	checkSlidesLength(images, previous = false, next = false) {
+		let index = this.state.activeIndex;
+		const URLPath = this.props.path.params.id;
+		images.map(item => {
+			if (item.id == URLPath) {
+				if (previous) {
+					const slidesLength = item.resources.photos.length;
+					if (index < 1) index = slidesLength;
+					--index;
+				} else if (next) {
+					const slidesLength = item.resources.photos.length - 1;
+					if (index === slidesLength) index = -1;
+					++index;
+				}
+			}
+			this.setState({ activeIndex: index });	
+		})
 	}
 
   	renderImages(properties) {

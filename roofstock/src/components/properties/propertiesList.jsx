@@ -28,8 +28,8 @@ const styles = {
         backgroundColor: 'rgb(248, 248, 248)'
     },
     propertyImage: {
-        maxWidth: "150px",
-        minHeight: "100px",
+        maxWidth: "175px",
+        minHeight: "120px",
         border: "2px solid rgb(221, 221, 221)",
         borderRadius: "5px",
         boxShadow: "2px 2px 4px 1px rgba(108, 108, 108, 0.75)"
@@ -44,6 +44,15 @@ const styles = {
     },
     tableRow: {
         fontSize: "16px"
+    },
+    primaryAddress: {
+        fontWeight: 500,
+        display: "block",
+        marginBottom: "5px"
+    },
+    secondaryAddress: {
+        fontSize: "13px",
+        color: "gray"
     }
 }
 
@@ -76,7 +85,10 @@ const PropertiesList = props => {
                             />
                             </Link>
                         </TableCell>
-                        <TableCell align="center" style={styles.tableRow}>{item.address.address1}</TableCell>
+                        <TableCell align="center" style={styles.tableRow}>
+                            <span style={styles.primaryAddress}>{item.address.address1}</span>
+                            <span style={styles.secondaryAddress}>{`${item.address.city}, ${item.address.state}`}</span>
+                        </TableCell>
                         <TableCell align="center" style={styles.tableRow}>
                             <PropertyPrice price={getPrice(item, true)} />
                         </TableCell>
