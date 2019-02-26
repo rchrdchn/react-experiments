@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const styles = {
 	arrowLeft: {
@@ -14,18 +14,16 @@ const styles = {
 	}
 }
 
-class CarouselLeftArrow extends Component {
-	render() {
-		return (
-			<Link
-				onClick={this.props.onClick}
-				to="#"
-				style={styles.arrowLeft}
-			>
-				<span className="fa fa-2x fa-angle-left" />
-			</Link>
-		);
-	}
+const CarouselLeftArrow = props => {
+	return (
+		<Link
+			onClick={props.onClick}
+			to="#"
+			style={styles.arrowLeft}
+		>
+			<span className="fa fa-2x fa-angle-left" />
+		</Link>
+	)
 }
 
 export default CarouselLeftArrow;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -26,17 +26,15 @@ const styles = {
     }
 }
 
-class CarouselSlider extends Component {
-    render() {
-        const { index, activeIndex, slide, filename } = this.props;
+const CarouselSlider = props => {
+        const { index, activeIndex, slide, filename } = props;
         const activeImage = (index === activeIndex ? styles.slideActive : styles.slide);
 
         return (
             <li style={activeImage}>
                 <img src={slide} alt={filename} style={styles.slideImage} />
             </li>
-        );
-    }
+        )
 }
 
 export default CarouselSlider;

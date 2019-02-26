@@ -22,18 +22,18 @@ const styles = {
 class Carousel extends Component {
 	constructor(props) {
 		super(props);
-
-		this.goToSlide = this.goToSlide.bind(this);
-		this.goToPrevSlide = this.goToPrevSlide.bind(this);
-		this.goToNextSlide = this.goToNextSlide.bind(this);
-
+		
 		this.state = {
 			activeIndex: 0
 		};
+		this.goToSlide = this.goToSlide.bind(this);
+		this.goToPrevSlide = this.goToPrevSlide.bind(this);
+		this.goToNextSlide = this.goToNextSlide.bind(this);
 	}
 
 	goToSlide(index) {
 		this.setState({ activeIndex: index });
+		console.log("goToSlide---1")
 	}
 
 	goToPrevSlide(e) {
@@ -48,6 +48,7 @@ class Carousel extends Component {
 		}
 
 		--index;
+		console.log("goToPrevSlide---2", index)
 
 		this.setState({ activeIndex: index });
 	}
@@ -64,6 +65,7 @@ class Carousel extends Component {
 		}
 
 		++index;
+		console.log("goToNextSlide---3", index, "slidesLength: ", slidesLength, "slides: ", slides)
 
 		this.setState({ activeIndex: index });
 	}
