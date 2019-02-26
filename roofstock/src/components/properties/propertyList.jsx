@@ -25,56 +25,70 @@ const styles = {
         boxShadow: "2px 2px 4px 1px rgba(108, 108, 108, 0.75)"
     },
     paddingTable: {
-        marginTop: "50px",
+        marginTop: "60px",
         padding: "0px 40px"
     },
     paddingHead: {
         paddingTop: "20px",
         paddingBottom: "20px"
+    },
+    tableHeader: {
+        color: "rgb(241, 115, 34)",
+        fontSize: "14px"
+    },
+    tableRow: {
+        fontSize: "16px"
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: 'grey'
+        }
     }
 }
 
-class PropertyList extends Component {
-    render() {
-        const { properties } = this.props.items;
-
-        return (
-            <div style={styles.paddingTable}>
-                <Paper>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell></TableCell>
-                                <TableCell align="center">Address</TableCell>
-                                <TableCell align="center">Listing Price</TableCell>
-                                <TableCell align="center">Monthly Rent</TableCell>
-                                <TableCell align="center">Gross Yield</TableCell>
-                                <TableCell align="center">Year</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {properties.map((item, index) => (
-                            <TableRow key={item.id}>
-                            <TableCell component="th" scope="row" style={styles.paddingHead}>
-                                <img
-                                    src={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
-                                    alt={item.address.address1}
-                                    style={styles.propertyImage}
-                                />
-                            </TableCell>
-                            <TableCell align="center">{item.address.address1}</TableCell>
-                            <TableCell align="center"><PropertyPrice price={getPrice(item)} /></TableCell>
-                            <TableCell align="center">{getRent(item)}</TableCell>
-                            <TableCell align="center">{getGrossYield(item)}</TableCell>
-                            <TableCell align="center">{getYear(item)}</TableCell>
-                            </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Paper>
-            </div>
-        )
-    }
+const PropertyList = props => {
+    const { properties } = props.items;
+    
+    return (
+        <div style={styles.paddingTable}>
+            <Paper>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>Address</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>Price (US$)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>Monthly Rent (US$)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>Gross Yield (%)</TableCell>
+                            <TableCell align="center" style={styles.tableHeader}>Year</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {properties.map((item, index) => (
+                        <TableRow key={item.id} style={styles.row}>
+                        <TableCell component="th" scope="row" style={styles.paddingHead}>
+                            <Link to={item.mainImageUrl ? `/property/${item.id}` : '/list'}>
+                            <img
+                                src={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
+                                alt={item.address.address1}
+                                style={styles.propertyImage}
+                            />
+                            </Link>
+                        </TableCell>
+                        <TableCell align="center" style={styles.tableRow}>{item.address.address1}</TableCell>
+                        <TableCell align="center" style={styles.tableRow}>
+                            <PropertyPrice price={getPrice(item)} />
+                        </TableCell>
+                        <TableCell align="center" style={styles.tableRow}>{getRent(item)}</TableCell>
+                        <TableCell align="center" style={styles.tableRow}>{getGrossYield(item)}</TableCell>
+                        <TableCell align="center" style={styles.tableRow}>{getYear(item)}</TableCell>
+                        </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Paper>
+        </div>
+    )
 }
 
 export default PropertyList;

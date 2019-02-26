@@ -14,7 +14,7 @@ const styles = {
 		color: "#FFFFFF",
 		display: "inline-block",
 		fontWeight: 500,
-		marginTop: "30px",
+		marginTop: "10px",
 		padding: "4px 8px"
 	}
 }

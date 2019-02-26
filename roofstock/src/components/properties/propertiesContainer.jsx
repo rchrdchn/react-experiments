@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
@@ -32,54 +32,53 @@ const styles = {
 		width: "290px"
 	},
 	padding: {
+		marginTop: "50px",
 		padding: "0px 40px"
 	}
 }
 
-class PropertiesContainer extends Component {
-	render() {
-		const { properties } = this.props.items;
+const PropertiesContainer = props => {
+	const { properties } = props.items;
 
-		return (
-			<div>
-				<Grid container spacing={24} style={styles.padding}>
-				{properties.map((item, index) => {
-					const URLLink = item.mainImageUrl ? `/property/${item.id}` : "/";
+	return (
+		<div>
+			<Grid container spacing={24} style={styles.padding}>
+			{properties.map((item, index) => {
+				const URLLink = item.mainImageUrl ? `/property/${item.id}` : "/";
 
-					return (
-				        <Grid item key={index} md={4} style={styles.width}>
-				          	<Paper>
-								<Link to={URLLink}>
-								<Card style={styles.height}>
-									<CardActionArea style={styles.card}>
-										<CardMedia
-											style={styles.media}
-											image={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
-											title={item.address.address1}
+				return (
+			        <Grid item key={index} md={4} style={styles.width}>
+			          	<Paper>
+							<Link to={URLLink}>
+							<Card style={styles.height}>
+								<CardActionArea style={styles.card}>
+									<CardMedia
+										style={styles.media}
+										image={item.mainImageUrl ? item.mainImageUrl : `${NoImage}`}
+										title={item.address.address1}
+									/>
+									<CardContent style={styles.height}>
+										<PropertyAddress
+											primary={item.address.address1}
+											secondary={`${item.address.city}, ${item.address.state}`}
 										/>
-										<CardContent style={styles.height}>
-											<PropertyAddress
-												primary={item.address.address1}
-												secondary={`${item.address.city}, ${item.address.state}`}
-											/>
-											<PropertyPrice price={getPrice(item)} />
-											<PropertyDetails
-												rent={getRent(item)}
-												grossYield={getGrossYield(item)}
-												year={getYear(item)}
-											/>
-										</CardContent>
-									</CardActionArea>
-								</Card>
-				        		</Link>
-							</Paper>
-				        </Grid>
-						)
-					})}
-				</Grid>
-			</div>
-		)
-	}
+										<PropertyPrice price={getPrice(item)} />
+										<PropertyDetails
+											rent={getRent(item)}
+											grossYield={getGrossYield(item)}
+											year={getYear(item)}
+										/>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+			        		</Link>
+						</Paper>
+			        </Grid>
+					)
+				})}
+			</Grid>
+		</div>
+	)
 }
 
 export default PropertiesContainer;
