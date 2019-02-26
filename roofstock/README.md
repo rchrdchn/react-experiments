@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Roofstock
 
-## Available Scripts
+__Coding Exercise: Front-end Developer: ReactJS__
 
-In the project directory, you can run:
+Step by step on how to run the final project
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Unzip roofstock.zip file
+* Open your preferred terminal
+* Change directory into the folder (roofstock) –– for instance: `cd roofstock`
+* Run `npm start` or `yarn start`
+* Open [http://localhost:3000](http://localhost:3000) to view the final project/solution in the browser
+* Page will reload if you make edits
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Project Description
 
-### `npm test`
+* Data source: 
+[http://dev1-sample.azurewebsites.net/properties.json](http://dev1-sample.azurewebsites.net/properties.json)
+             
+* Display the properties from the data-source above in a card/list view with following fields, user should be able to toggle between card/list views.
+ 
+## Properties (card/list views) Fields
+* Property Image _(mainImageUrl)_
+* Address  _(address)_
+* Year Built _(physical.yearbuilt)_
+* List Price $ (formatted to two decimal places - e.g. $120,000.00) _(financial.listPrice)_
+* Monthly Rent $ (formatted to two decimal places - e.g. $1,234.00) . _(financial.monthlyRent)_
+* Gross Yield % ('Monthly Rent' * 12 / 'List Price') - e.g. 12.55% (calculated)
+ 
+## Property Detail
+* When a user clicks on a property card view or list view, navigate to property detail route and display
+* Address of property _(address)_
+* Carousel that allows user to navigate between images _(resources.photos)_
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Note
+For styling inspiration, refer to [https://www.roofstock.com/investment-property-marketplace](https://www.roofstock.com/investment-property-marketplace).
+Application should be using ReactJS. You may use any styling solution to style the pages.
 
-### `npm run build`
+__Include a zip file or a link to download the zip for the solution in the email and also include any instructions to run the solution.__
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Additional Details
+Project GitHub Repository: [Roofstock](https://github.com/rchrdchn/react-experiments/tree/master/roofstock)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Richard Chan** | [GitHub Profile](https://github.com/rchrdchn) | [LinkedIn Profile](https://www.linkedin.com/in/rchrdchn/)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+--
