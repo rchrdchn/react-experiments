@@ -2,15 +2,15 @@ import React from 'react';
 
 const styles = {
 	footer: {
-		margin: '50px 30px',
-		borderTop: '1px solid rgba(118, 118, 118, 0.3)'
+		margin: "50px 30px",
+		borderTop: "1px solid rgba(118, 118, 118, 0.3)"
 	},
 	innerText: {
-		color: '#767676',
-		fontSize: '13px',
-		marginTop: '20px',
-		textAlign: 'left',
-		lineHeight: '24px'
+		color: "#767676",
+		fontSize: "13px",
+		marginTop: "20px",
+		textAlign: "left",
+		lineHeight: "24px"
 	}
 }
 const Footer = () => {

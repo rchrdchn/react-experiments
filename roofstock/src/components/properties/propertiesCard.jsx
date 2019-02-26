@@ -37,7 +37,7 @@ const styles = {
 	}
 }
 
-const PropertiesContainer = props => {
+const PropertiesCard = props => {
 	const { properties } = props.items;
 
 	return (
@@ -81,4 +81,4 @@ const PropertiesContainer = props => {
 	)
 }
 
-export default PropertiesContainer;
+export default PropertiesCard;

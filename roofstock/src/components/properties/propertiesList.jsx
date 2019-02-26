@@ -17,6 +17,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 const styles = {
+    row: {
+        backgroundColor: 'rgb(248, 248, 248)'
+    },
     propertyImage: {
         maxWidth: "150px",
         minHeight: "100px",
@@ -38,15 +41,10 @@ const styles = {
     },
     tableRow: {
         fontSize: "16px"
-    },
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: 'grey'
-        }
     }
 }
 
-const PropertyList = props => {
+const PropertiesList = props => {
     const { properties } = props.items;
     
     return (
@@ -91,4 +89,4 @@ const PropertyList = props => {
     )
 }
 
-export default PropertyList;
+export default PropertiesList;

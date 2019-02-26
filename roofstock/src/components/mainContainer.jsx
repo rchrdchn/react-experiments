@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import Navbar from './navbar';
 import Footer from './footer';
-import PropertiesContainer from './properties/propertiesContainer';
+import PropertiesCard from './properties/propertiesCard';
+import PropertiesList from './properties/propertiesList';
 import PropertyContainer from './property/propertyContainer';
-import PropertyList from './properties/propertyList';
 
 const styles = {
 	loadingText: {
@@ -55,13 +55,13 @@ class RoofContainer extends Component {
 				<div>
 					<Navbar />
 					<Route path="/" exact render={
-						props => <PropertiesContainer {...props} items={items} />
+						props => <PropertiesCard {...props} items={items} />
 					} />
 					<Route path="/property/:id" component={
 						props => <PropertyContainer {...props} items={items} />
 					} />
 					<Route path="/list" exact render={
-						props => <PropertyList {...props} items={items} />
+						props => <PropertiesList {...props} items={items} />
 					} />
 					<Footer />
 				</div>
