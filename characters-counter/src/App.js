@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			text: '',
+			characters: ''
+		}
+
+		this.onInputChange = this.onInputChange.bind(this);
+	}
+
+	onInputChange(e) {
+		const chars = e.target.value.split('').length;
+
+		this.setState({
+			text: e.target.value,
+			characters: chars
+		})
+	}
+
+	render() {
+		const { characters, text } = this.state;
+
+		return (
+			<div>
+				<textarea
+					type="text"
+					value={text}
+					onChange={this.onInputChange}
+				/>
+				<p>Character count: {characters}</p>
+			</div>
+		)
+	}
 }
 
 export default App;
